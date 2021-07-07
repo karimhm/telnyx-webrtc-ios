@@ -235,7 +235,8 @@ extension ViewController : UIIncomingCallViewDelegate {
     }
 
     func onRejectButton() {
-        self.currentCall?.hangup()
+		guard let uuid = self.currentCall?.callInfo?.callId else { return }
+		self.executeEndCallAction(uuid: uuid)
     }
 }
 // MARK: - UICallScreenDelegate

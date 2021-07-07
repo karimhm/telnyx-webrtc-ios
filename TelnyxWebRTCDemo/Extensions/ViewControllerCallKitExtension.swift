@@ -113,6 +113,8 @@ extension ViewController {
                 print("EndCallAction transaction request failed: \(error.localizedDescription).")
             } else {
                 print("EndCallAction transaction request successful")
+				// Once the callKit transaction has ended we can end the call of UUID
+				self.telnyxClient?.calls[uuid]?.hangup() // End the current call
             }
         }
     }
