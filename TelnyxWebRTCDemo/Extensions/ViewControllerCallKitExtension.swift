@@ -178,10 +178,10 @@ extension ViewController : CXProviderDelegate {
 
         executeCall(uuid: action.callUUID) { success in
             if success {
-                print("performVoiceCall() successful")
+                print("executeCall() successful")
                 provider.reportOutgoingCall(with: action.callUUID, connectedAt: Date())
             } else {
-                print("performVoiceCall() failed")
+                print("executeCall() failed")
             }
         }
 
@@ -193,9 +193,9 @@ extension ViewController : CXProviderDelegate {
 
         executeAnswerCall(uuid: action.callUUID) { success in
             if success {
-                print("performAnswerVoiceCall() successful")
+                print("executeAnswerCall() successful")
             } else {
-                print("performAnswerVoiceCall() failed")
+                print("executeAnswerCall() failed")
             }
         }
 

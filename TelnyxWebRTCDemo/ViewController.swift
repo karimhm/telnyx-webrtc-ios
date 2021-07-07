@@ -231,12 +231,24 @@ extension ViewController: TxClientDelegate {
 extension ViewController : UIIncomingCallViewDelegate {
 
     func onAnswerButton() {
-        self.currentCall?.answer()
+		guard let callUUID = self.currentCall?.callInfo?.callId else { return }
+		self.executeAnswerCall(uuid: callUUID) { success in
+			if success {
+				print("executeAnswerCall() successful")
+			} else {
+				print("executeAnswerCall() failed")
+			}
+		}
     }
 
     func onRejectButton() {
-		guard let uuid = self.currentCall?.callInfo?.callId else { return }
-		self.executeEndCallAction(uuid: uuid)
+		#if targetEnvironment(simulator)
+			self.currentCall?.hangup()
+		#else
+			// for real devices
+			guard let uuid = self.currentCall?.callInfo?.callId else { return }
+			self.executeEndCallAction(uuid: uuid)
+		#endif
     }
 }
 // MARK: - UICallScreenDelegate
