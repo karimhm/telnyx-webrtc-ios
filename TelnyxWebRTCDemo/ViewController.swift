@@ -72,6 +72,11 @@ class ViewController: UIViewController {
         self.incomingCallView.updateButtonsState(callState: callState, incomingCall: incomingCall)
     }
 
+	@IBAction func copyAPNSTokenToClipboard(_ sender: Any) {
+		let token = UserDefaults.init().getPushToken()
+		UIPasteboard.general.string = token
+	}
+
     @IBAction func connectButtonTapped(_ sender: Any) {
         guard let telnyxClient = self.telnyxClient else {
             return
